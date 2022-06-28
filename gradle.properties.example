@@ -1,0 +1,3 @@
+flywayDatabaseUrl=jdbc:postgresql://localhost:5432/your_database
+flywayDatabaseUsername=your_database_username
+flywayDatabasePassword=your_database_password
