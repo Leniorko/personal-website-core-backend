@@ -9,6 +9,7 @@ CREATE TABLE picooc_data(
   muscles_percent decimal NOT NULL,
   water_percent decimal NOT NULL,
   metabolic_age int NOT NULL,
+  bone_mass decimal NOT NULL,
   bmr int NOT NULL
 );
 
@@ -26,6 +27,7 @@ SELECT
   ROUND(AVG(muscles_percent), 2) AS week_average_muscles_percent,
   ROUND(AVG(water_percent), 2) AS week_average_water_percent,
   MIN(metabolic_age) AS week_minimum_metabolic_age,
+  ROUND(AVG(bone_mass), 2) AS week_average_bone_mass,
   ROUND(AVG(bmr), 2) AS week_average_bmr
 FROM
   picooc_data
