@@ -10,6 +10,11 @@ import com.leniorko.personalwebsitecorebackend.entities.PicoocData;
 
 @Repository
 public interface PicoocDataRepository extends CrudRepository<PicoocData, Long> {
+  List<PicoocData> findAll();
 
   List<PicoocData> findByWeightTime(Timestamp weightTime);
+
+  List<PicoocData> findByWeightTimeGreaterThanEqual(Timestamp to);
+
+  List<PicoocData> findByWeightTimeBetween(Timestamp from, Timestamp to);
 }

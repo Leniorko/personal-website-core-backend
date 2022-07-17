@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "picooc_data")
+@Data
 @RequiredArgsConstructor
 public class PicoocData {
 

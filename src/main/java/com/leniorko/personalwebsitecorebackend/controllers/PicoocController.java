@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +32,18 @@ public class PicoocController {
   Logger logger = LoggerFactory.getLogger(PicoocController.class);
 
   @GetMapping("/get-all")
-  public String getAll() {
-    // TODO: Write simple getAll
-    // TODO: Replace simple getAll with endpoint with filters
-    return "Will return every row from picooc_data table";
+  public ResponseEntity<List<PicoocData>> getAll(@RequestParam(name = "from", required = false) Timestamp from,
+      @RequestParam(name = "to", required = false) Timestamp to) {
+
+    if (from != null && to != null) {
+      return ResponseEntity.ok(picoocDataRepository.findByWeightTimeBetween(from, to));
+    }
+
+    if (to != null) {
+      return ResponseEntity.ok(picoocDataRepository.findByWeightTimeGreaterThanEqual(to));
+    }
+
+    return ResponseEntity.ok(picoocDataRepository.findAll());
   }
 
   @GetMapping("/get-all-average")
@@ -74,10 +83,12 @@ public class PicoocController {
           // TODO: Figure out way to properly create PicoocData without index shenanigans
           PicoocData picoocData = new PicoocData(currentRowTimestamp,
               Float.parseFloat(row[1].replace(',', '.')),
-              Float.parseFloat(row[2].replace(',', '.')), Integer.parseInt(row[3]),
+              Float.parseFloat(row[2].replace(',', '.')),
+              Integer.parseInt(row[3]),
               Float.parseFloat(row[4].replace(',', '.')),
               Float.parseFloat(row[5].replace(',', '.')),
-              Integer.parseInt(row[6]), Float.parseFloat(row[7].replace(',', '.')), Integer.parseInt(row[8]));
+              Integer.parseInt(row[6]), Float.parseFloat(row[7].replace(',', '.')),
+              Integer.parseInt(row[8]));
           picoocDataRepository.save(picoocData);
         }
 
