@@ -1,12 +1,14 @@
-package com.leniorko.personalwebsitecorebackend.Entities;
+package com.leniorko.personalwebsitecorebackend.entities;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -14,32 +16,45 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "picooc_data")
 @RequiredArgsConstructor
 public class PicoocData {
-  // TODO: Write repo to access this data
   @Id
-  private Integer id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private String id;
 
   @NonNull
-  private Date weight_time;
+  @Column(name = "weight_time")
+  private Timestamp weightTime;
 
   @NonNull
+  @Column(name = "weight")
   private Float weight;
 
   @NonNull
-  private Float body_fat;
+  @Column(name = "body_fat")
+  private Float bodyFat;
 
   @NonNull
-  private Integer fisceral_fat_index;
+  @Column(name = "visceral_fat_index")
+  private Integer fisceralFatIndex;
 
   @NonNull
-  private Float muscles_percent;
+  @Column(name = "muscles_percent")
+  private Float musclesPercent;
 
   @NonNull
-  private Float water_percent;
+  @Column(name = "water_percent")
+  private Float waterPercent;
 
   @NonNull
-  private Integer metabolic_age;
+  @Column(name = "metabolic_age")
+  private Integer metabolicAge;
 
   @NonNull
+  @Column(name = "bone_mass")
+  private Float boneMass;
+
+  @NonNull
+  @Column(name = "bmr")
   private Integer bmr;
 
 }
