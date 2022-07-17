@@ -16,10 +16,16 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "picooc_data")
 @RequiredArgsConstructor
 public class PicoocData {
+
+  public PicoocData() {
+    // Method for retreiving data from repo required default constructor. IDK why
+    // but it should be here.
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private String id;
+  private Long id;
 
   @NonNull
   @Column(name = "weight_time")

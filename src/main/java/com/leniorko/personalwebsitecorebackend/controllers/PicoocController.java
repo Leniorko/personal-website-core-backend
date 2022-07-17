@@ -60,22 +60,26 @@ public class PicoocController {
 
       String[] row;
       while ((row = myParser.parseNext()) != null) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String currentRowStringTime = LocalDateTime.parse(row[0], format).format(format);
 
         if (logger.isInfoEnabled()) {
           logger.info(Arrays.toString(row));
         }
 
-        // TODO: Write save logic that check uniqueness
-        // TODO: Figure out way to properly create PicoocData without index shenanigans
-        PicoocData picoocData = new PicoocData(Timestamp.valueOf(currentRowStringTime),
-            Float.parseFloat(row[1].replace(',', '.')),
-            Float.parseFloat(row[2].replace(',', '.')), Integer.parseInt(row[3]),
-            Float.parseFloat(row[4].replace(',', '.')),
-            Float.parseFloat(row[5].replace(',', '.')),
-            Integer.parseInt(row[6]), Float.parseFloat(row[7].replace(',', '.')), Integer.parseInt(row[8]));
-        picoocDataRepository.save(picoocData);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String currentRowStringTime = LocalDateTime.parse(row[0], format).format(format);
+        Timestamp currentRowTimestamp = Timestamp.valueOf(currentRowStringTime);
+
+        if (picoocDataRepository.findByWeightTime(currentRowTimestamp).isEmpty()) {
+          logger.info("Save logic hit");
+          // TODO: Figure out way to properly create PicoocData without index shenanigans
+          PicoocData picoocData = new PicoocData(currentRowTimestamp,
+              Float.parseFloat(row[1].replace(',', '.')),
+              Float.parseFloat(row[2].replace(',', '.')), Integer.parseInt(row[3]),
+              Float.parseFloat(row[4].replace(',', '.')),
+              Float.parseFloat(row[5].replace(',', '.')),
+              Integer.parseInt(row[6]), Float.parseFloat(row[7].replace(',', '.')), Integer.parseInt(row[8]));
+          picoocDataRepository.save(picoocData);
+        }
 
       }
 
