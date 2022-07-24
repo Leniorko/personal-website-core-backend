@@ -19,16 +19,16 @@ CREATE INDEX idx_weight_time ON picooc_data (weight_time);
 
 CREATE VIEW picooc_data_average AS
 SELECT
-  DATE_PART('week', weight_time) AS weight_week,
-  DATE_PART('year', weight_time) AS weight_year,
-  ROUND(AVG(weight), 2) AS week_average_weight,
-  ROUND(AVG(body_fat), 2) AS week_average_body_fat,
-  MIN(visceral_fat_index) AS week_minimum_visceral_fat_index,
-  ROUND(AVG(muscles_percent), 2) AS week_average_muscles_percent,
-  ROUND(AVG(water_percent), 2) AS week_average_water_percent,
-  MIN(metabolic_age) AS week_minimum_metabolic_age,
-  ROUND(AVG(bone_mass), 2) AS week_average_bone_mass,
-  ROUND(AVG(bmr), 2) AS week_average_bmr
+  DATE_PART('week', weight_time) AS week,
+  DATE_PART('year', weight_time) AS year,
+  ROUND(AVG(weight), 2) AS average_weight,
+  ROUND(AVG(body_fat), 2) AS average_body_fat,
+  MIN(visceral_fat_index) AS minimum_visceral_fat_index,
+  ROUND(AVG(muscles_percent), 2) AS average_muscles_percent,
+  ROUND(AVG(water_percent), 2) AS average_water_percent,
+  MIN(metabolic_age) AS minimum_metabolic_age,
+  ROUND(AVG(bone_mass), 2) AS average_bone_mass,
+  ROUND(AVG(bmr), 2) AS average_bmr
 FROM
   picooc_data
 GROUP BY
