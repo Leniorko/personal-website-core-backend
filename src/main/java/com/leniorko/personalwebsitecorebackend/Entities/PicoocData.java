@@ -66,5 +66,3 @@ public class PicoocData {
   private Integer bmr;
 
 }
-
-// TODO: Write same logic for view access
