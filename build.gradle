@@ -37,6 +37,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.univocity/univocity-parsers
 	implementation 'com.univocity:univocity-parsers:2.9.1'
 
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+	// Swagger URL <baseurl>/swagger-ui/index.html/
+	// In case of default config: http://localhost:5000/swagger-ui/index.html/ 
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
 }
 
 tasks.named('test') {
